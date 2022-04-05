@@ -2,7 +2,7 @@ const express = require('express');
 const db = require('../private/db');
 const router = express.Router();
 
-/* GET PEP-check for one person. */
+/* GET users listing. */
 router.get('/:name', function(req, res, next) {
   try {
     const caseSensitive = (req.query.caseSensitive === 'true');
