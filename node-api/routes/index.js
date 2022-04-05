@@ -3,7 +3,7 @@ const router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'KYC-Check' });
+  res.render('index', { title: 'PEP-Check' });
 });
 
 module.exports = router;

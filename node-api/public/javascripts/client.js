@@ -18,7 +18,10 @@ function runCheck() {
     }).then((data) => {
         console.log(data);
         const { isPep } = data;
-        document.getElementById('pep-response').innerHTML = isPep;
+        const resp = document.getElementById('pep-response');
+        resp.innerHTML = isPep + (isPep
+            ? ', person is politically exposed.'
+            : ', person is not known to be politically exposed.');
     }).catch((reason) => {
         console.error(`Exception in fetch callback: ${reason}`);
     })
