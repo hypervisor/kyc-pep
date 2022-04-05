@@ -17,7 +17,7 @@ router.get('/:name', function(req, res, next) {
         } else {
             res.render('index.html', {
                 title: 'KYC Check',
-                responseTitle: 'No response',
+                responseTitle: isPep ? 'Person is politically exposed.' : 'Person is not known to be politically exposed.',
                 items: []
             });
         }
