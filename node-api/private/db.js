@@ -1,34 +1,48 @@
 const csv = require('csv-parser');
 const fs = require('fs');
+const { init } = require('../app');
 
-const searchCsv = function(name) {
-    let isPep = false;
-    const stream = fs.createReadStream('private/pep_data.csv');
-    stream.pipe(csv())
+let people = [];
+
+const initDb = function () {
+    fs.createReadStream('private/pep_data.csv')
+        .pipe(csv())
         .on('data', (row) => {
-            // Basic sanity checks
-            if (row == null || row.name == null || row.aliases == null) {
-                return;
-            }
-
-            // Check full name
-            if (row.name == name) {
-                isPep = true;
-                stream.close();
-                return;
-            }
-
-            // Check name in aliases
-            const aliases = row.aliases.split(';');
-            if (aliases.includes(name)) {
-                isPep = true;
-                stream.close();
-                return;
-            }
-      });
-
-    return isPep;
+            people.push(row);
+        })
+        .on('end', () => {
+            console.log('Parsed CSV!');
+        });
 }
+
+const searchCsv = function (name) {
+    for (const person of people) {
+        // Basic sanity checks
+        if (person == null || person.name == null || person.aliases == null) {
+            continue;
+        }
+
+        //console.log(person);
+
+        // Check full name
+        if (person.name == name) {
+            console.log(`Found ${name} in PEP database!`);
+            return true;
+        }
+
+        // Check name in aliases
+        const aliases = person.aliases.split(';');
+        if (aliases.includes(name)) {
+            console.log(`Found ${name} in PEP database!`);
+            return true;
+        }
+    }
+
+    return false;
+}
+
+// Read from CSV to an in-memory array
+initDb();
 
 module.exports = {
     search: searchCsv
