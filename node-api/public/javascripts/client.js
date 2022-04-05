@@ -12,8 +12,15 @@ function runCheck() {
         console.log(`Checking company ${input}`);
         console.log(url);
 
-        
+        document.getElementById('pep-response').innerHTML = "Searching...";
 
+        fetch(url).then((res) => {
+            return res.json();
+        }).then((data) => {
+            console.log(data);
+        }).catch((reason) => {
+            console.error(`Exception in fetch callback: ${reason}`);
+        });
     } else {
         
         if (input.length == 0) {
