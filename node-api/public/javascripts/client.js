@@ -40,7 +40,6 @@ function runCheck() {
         });
 
     } else {
-
         if (input.length == 0) {
             alert('Please enter a name');
             return;

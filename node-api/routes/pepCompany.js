@@ -12,9 +12,8 @@ router.get('/:orgNr', function(req, res, next) {
         console.log(url);
 
         fetch(url).then(response => {
-            if (response.status != 200) {
-                res.sendStatus(response.status);
-                return;
+            if (!response.ok) {
+                throw Error();
             }
             return response.json();
         }).then(data => {
@@ -49,7 +48,7 @@ router.get('/:orgNr', function(req, res, next) {
 
             res.json({ matches: pepMatches });
         }).catch((reason) => {
-            console.error(`Exception in fetch callback: ${reason}`);
+            res.sendStatus(404);
         });
     } catch (err) {
         console.error(err.message);
