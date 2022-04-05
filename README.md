@@ -1,13 +1,26 @@
 # Stacc code challenge 2021
 
 ## Oppgavebeskrivelse
-Her kan beskrive hvilke oppgave(r) du har valgt å løse.
-> Bekriv prosjektet ditt kort.
+Jeg har valgt å gjøre både oppgave a og b, og å utvide det til å sjekke alle personer i et selskap og å visualisere dette.
 
 ## Hvordan kjøre prosjektet
-For eksempel ***yarn start***
-> Husk å pakke med alle avhengigheter.
+Etter repositoriet er klonet, kjør følgende kommandoer:
+```
+cd node-api
+npm install
+node .
+```
+
+Alternativt kan du installere nodemon,
+```
+npm install -g nodemon
+```
+og starte serveren med
+```
+nodemon
+```
+for automatiske oppdateringer.
 
 ## Kommentarer
-Noen spesielle valg du ønsker å beskrive/forsvare?
-> Eventuellt andre kommentarer / utfordringer?
+
+Gøy oppgave :)
