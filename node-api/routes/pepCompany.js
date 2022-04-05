@@ -22,8 +22,8 @@ router.get('/:orgNr', function(req, res, next) {
                 return;
             }
 
-            // Array of employees in company that were found in the PEP database.
-            const pepMatches = [];
+            // Array of employees in company.
+            const employees = [];
 
             const rollegruppetyper = data;
             for (const rollegruppetype of rollegruppetyper) {
@@ -34,22 +34,40 @@ router.get('/:orgNr', function(req, res, next) {
                     }
 
                     const fullName = `${rolletype.person.navn.fornavn} ${rolletype.person.navn.etternavn}`;
+                    const employee = {
+                        rolletype: rolletype.type.beskrivelse,
+                        name: fullName,
+                        isPep: db.search(fullName, false)
+                    };
 
-                    if (db.search(fullName, false)) {
-                        const pepMatch = {
-                            rolletype: rolletype.type.beskrivelse,
-                            name: fullName
-                        };
-                        console.log('Found PEP match in company:');
-                        console.log(pepMatch);
-                        pepMatches.push(pepMatch);
-                    }
+                    employees.push(employee);
                 }
             }
 
-            res.json({ matches: pepMatches });
+            if (req.is('application/json')) {
+                res.json({ employees: employees });
+            } else {
+                const itemsToRender = [];
+                for (const employee of employees) {
+                    itemsToRender.push({
+                        header: employee.rolletype,
+                        title: employee.name,
+                        desc: employee.isPep ? 'Person is politically exposed.' : 'Person is not known to be politically exposed.',
+                        useAlertStyle: employee.isPep
+                    });
+                }
+                res.render('index.html', {
+                    title: 'KYC Check',
+                    responseTitle: `${employees.length} registered employees`,
+                    items: itemsToRender
+                });
+            }
         }).catch((reason) => {
-            res.sendStatus(404);
+            res.render('index.html', {
+                title: 'KYC Check',
+                responseTitle: 'Invalid organisation number',
+                items: []
+            });
         });
     } catch (err) {
         console.error(err.message);

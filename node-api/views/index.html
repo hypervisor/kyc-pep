@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>{{ title }}</title>
+
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <h1>{{ title }}</h1>
+
+        <div class="card mt-5 p-4">
+            <p>Enter a name below to run a PEP check on a person</p>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <select class="custom-select" id="pep-type">
+                        <option selected>Company</option>
+                        <option>Individual</option>
+                    </select>
+                </div>
+                <input type="text" class="form-control" id="pep-input" placeholder="Name or organisation number">
+                <div class="input-group-append">
+                    <input type="button" class="btn btn-primary" value="Search" onclick="doSearch()">
+                </div>
+            </div>
+            <div class="custom-control custom-checkbox my-1 mr-sm-2">
+                <input type="checkbox" class="custom-control-input" id="pep-case">
+                <label class="custom-control-label" for="pep-case">Case-sensitive search</label>
+            </div>
+        </div>
+
+        <br>
+        <h2>Response</h2>
+
+        <div class="alert alert-primary" role="alert">
+            Politically Exposed Persons (PEPs) generally present a higher risk for potential involvement in bribery and corruption!
+        </div>
+
+        <p>{{ responseTitle }}</p>
+        <div class="row">
+            {% for item in items %} {% if item.useAlertStyle %} {% include "itemAlert.html" %} {% else %} {% include "itemRegular.html" %} {% endif %} {% endfor %}
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script src="/javascripts/client.js"></script>
+</body>
+
+</html>
