@@ -8,10 +8,10 @@ Etter repositoriet er klonet, kjør følgende kommandoer:
 ```
 cd node-api
 npm install
-node .
+node ./bin/www
 ```
 
-Alternativt kan du installere nodemon,
+Alternativt kan du installere nodemon (anbefalt!),
 ```
 npm install -g nodemon
 ```
