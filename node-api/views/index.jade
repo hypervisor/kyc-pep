@@ -1,17 +1,32 @@
 extends layout
 
 block content
+  if errors
+    ul.my-errors
+      for error in errors
+        li= error.msg
+
   h1= title
   p Welcome to #{title}
+  .alert.alert-primary(role='alert')
+      | This is a primary alert—check it out!
+  
   p Enter a name below to run a PEP check on a person
-  input(type="text" id="pep-name")
-  button(onclick="runCheck()") Search
-  br
-  br
-  input(type="checkbox" id="pep-case")
-  label(for="pep-case") Case-sensitive search
-  br
-  input(type="checkbox" id="pep-company")
-  label(for="pep-company") Search company
+
+  form.form-inline
+    .form-group.mx-sm-3.mb-2
+      input#pep-name.form-control(type='text' placeholder='Name or organization number')
+    input.btn.btn-primary.mb-2(type="button" onclick="runCheck()" value="Search")
+
+  .form-check
+      input#pep-case.form-check-input(type='checkbox' value='')
+      label.form-check-label(for='pep-case')
+        | Case-sensitive search
+
+  .form-check
+      input#pep-company.form-check-input(type='checkbox' value='')
+      label.form-check-label(for='pep-company')
+        | Search company
+  
   h2 Response 
   p(id="pep-response") N/A
