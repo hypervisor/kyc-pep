@@ -21,13 +21,12 @@ router.get('/:orgNr', function(req, res, next) {
             if (data == null) {
                 return;
             }
-            console.log(data);
+
             // Array of employees in company that were found in the PEP database.
             const pepMatches = [];
 
             const rollegruppetyper = data;
             for (const rollegruppetype of rollegruppetyper) {
-                console.log(rollegruppetype.type.beskrivelse);
                 for (const rolletype of rollegruppetype.roller) {
                     //console.log(rolletype.person);
                     if (rolletype.person == null) {
@@ -35,13 +34,15 @@ router.get('/:orgNr', function(req, res, next) {
                     }
 
                     const fullName = `${rolletype.person.navn.fornavn} ${rolletype.person.navn.etternavn}`;
-                    console.log('\t' + fullName);
 
                     if (db.search(fullName, false)) {
-                        pepMatches.push({
+                        const pepMatch = {
                             rolletype: rolletype.type.beskrivelse,
                             name: fullName
-                        });
+                        };
+                        console.log('Found PEP match in company:');
+                        console.log(pepMatch);
+                        pepMatches.push(pepMatch);
                     }
                 }
             }

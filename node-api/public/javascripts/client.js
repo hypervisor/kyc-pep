@@ -15,8 +15,8 @@ function runCheck() {
         console.log(`Checking company ${input}`);
         console.log(url);
 
-        const resp = document.getElementById('pep-response');
-        resp.innerHTML = "Searching...";
+        const respElement = document.getElementById('pep-response');
+        respElement.innerHTML = "Searching...";
 
         fetch(url).then(res => {
             if (!res.ok) {
@@ -26,16 +26,16 @@ function runCheck() {
         }).then(data => {
             const { matches } = data;
             if (matches.length == 0) {
-                resp.innerHTML = "No PEPs found in company!";
+                respElement.innerHTML = "No PEPs found in company!";
             } else {
                 let resp = '';
                 for (const el of matches) {
                     resp += `${el.name} (${el.rolletype})<br>`;
                 }
-                resp.innerHTML = resp;
+                respElement.innerHTML = resp;
             }
         }).catch((reason) => {
-            resp.innerHTML = "Invalid organization number!";
+            respElement.innerHTML = "Invalid organization number!";
             console.error(`Exception in fetch callback: ${reason}`);
         });
 
