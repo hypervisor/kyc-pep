@@ -1,12 +1,14 @@
 function runCheck() {
     const isCompany = document.getElementById('pep-company').checked;
-    const input = document.getElementById('pep-name').value;
+    let input = document.getElementById('pep-name').value;
 
     if (isCompany) {
         if (input.length == 0) {
             alert('Please enter an organization number');
             return;
         }
+
+        input = input.replaceAll(' ', '');
 
         const url = `/api/v1/company/${input}`;
         console.log(`Checking company ${input}`);
@@ -17,7 +19,16 @@ function runCheck() {
         fetch(url).then((res) => {
             return res.json();
         }).then((data) => {
-            console.log(data);
+            const { matches } = data;
+            if (matches.length == 0) {
+                document.getElementById('pep-response').innerHTML = "No PEPs found in company!";
+            } else {
+                let resp = '';
+                for (const el of matches) {
+                    resp += `${el.name} (${el.rolletype})<br>`;
+                }
+                document.getElementById('pep-response').innerHTML = resp;
+            }
         }).catch((reason) => {
             console.error(`Exception in fetch callback: ${reason}`);
         });

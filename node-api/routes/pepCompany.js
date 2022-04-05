@@ -31,7 +31,6 @@ router.get('/:orgNr', function(req, res, next) {
 
                 if (db.search(fullName, false)) {
                     pepMatches.push({
-                        rollegruppetype: rollegruppetype.type.beskrivelse,
                         rolletype: rolletype.type.beskrivelse,
                         name: fullName
                     });
