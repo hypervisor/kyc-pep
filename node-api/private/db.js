@@ -15,25 +15,29 @@ const initDb = function () {
         });
 }
 
-const searchCsv = function (name) {
+const searchCsv = function (name, caseSensitive) {
+    const searchTerm = caseSensitive ? name : name.toLowerCase();
+
     for (const person of people) {
         // Basic sanity checks
         if (person == null || person.name == null || person.aliases == null) {
             continue;
         }
 
-        //console.log(person);
+        const toSearch = caseSensitive ? person.name : person.name.toLowerCase();
 
         // Check full name
-        if (person.name == name) {
-            console.log(`Found ${name} in PEP database!`);
+        if (toSearch == searchTerm) {
             return true;
         }
 
         // Check name in aliases
-        const aliases = person.aliases.split(';');
-        if (aliases.includes(name)) {
-            console.log(`Found ${name} in PEP database!`);
+        let aliases = person.aliases.split(';');
+        if (!caseSensitive) {
+            aliases = aliases.map((x) => x.toLowerCase());
+        }
+
+        if (aliases.includes(searchTerm)) {
             return true;
         }
     }

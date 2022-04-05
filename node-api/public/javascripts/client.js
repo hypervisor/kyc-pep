@@ -5,12 +5,13 @@ function runCheck() {
         return;
     }
 
-    console.log(`Checking ${name}`);
+    const caseSensitive = document.getElementById('pep-case').checked;
+    const url = encodeURI(`/api/v1/pep/${name}?caseSensitive=${caseSensitive}`);
 
-    const url = encodeURI(`/api/v1/pep/${name}`);
+    console.log(`Checking ${name}, caseSensitive: ${caseSensitive}`);
     console.log(url);
 
-    document.getElementById('pep-response').innerHTML = "Searching...!";
+    document.getElementById('pep-response').innerHTML = "Searching...";
 
     fetch(url).then((res) => {
         return res.json();
