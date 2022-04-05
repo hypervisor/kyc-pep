@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/cd3d88ff-83bc-47ae-a138-00df86224a71/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/kyc-pep",
+    "appService.deploySubpath": "."
+}
