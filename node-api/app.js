@@ -10,7 +10,7 @@ const pepPerson = require('./routes/pepPerson');
 const pepCompany = require('./routes/pepCompany');
 
 const app = express();
-
+/*
 // Setup nunjucks
 nunjucks.configure('views', {
     autoescape: true,
@@ -18,14 +18,14 @@ nunjucks.configure('views', {
 });
 
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'nunjucks');
-
+*/
+app.set('view engine', 'html');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+/*
 app.use('/', indexRouter);
 app.use('/person/', pepPerson);
 app.use('/company/', pepCompany);
@@ -45,6 +45,11 @@ app.use(function(err, req, res, next) {
     // render the error page
     res.status(err.status || 500);
     res.render('error');
+});
+*/
+
+app.use('/', (req, res) => {
+    res.send('<h1>Works so far</h1>');
 });
 
 module.exports = app;
