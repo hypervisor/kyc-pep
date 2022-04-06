@@ -10,7 +10,7 @@ const path = require('path');
 let people = [];
 
 const initDb = function() {
-    fs.createReadStream(path.join(__dirname, 'pep_data.csv'))
+    fs.createReadStream(path.join(__dirname, 'pep.csv'))
         .pipe(csv())
         .on('data', (row) => {
             people.push(row);

@@ -5,6 +5,11 @@ function doSearch() {
     const isCompany = searchType == 'Company';
     const path = isCompany ? 'company' : 'person';
 
+    if (input == null || input.length == 0) {
+        alert('No input given!');
+        return;
+    }
+
     if (isCompany) {
         input = input.replaceAll(' ', '');
     }
