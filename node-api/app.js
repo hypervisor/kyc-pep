@@ -12,7 +12,7 @@ const pepCompany = require('./routes/pepCompany');
 const app = express();
 
 // Setup nunjucks
-nunjucks.configure('views', {
+nunjucks.configure(path.join(__dirname, 'views'), {
     autoescape: true,
     express: app
 });
