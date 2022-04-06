@@ -1,6 +1,7 @@
 const csv = require('csv-parser');
 const fs = require('fs');
 const { init } = require('../app');
+const path = require('path');
 
 //
 // This file is used to abstract the "database".
@@ -8,8 +9,8 @@ const { init } = require('../app');
 
 let people = [];
 
-const initDb = function () {
-    fs.createReadStream('private/pep_data.csv')
+const initDb = function() {
+    fs.createReadStream(path.join(__dirname, 'pep_data.csv'))
         .pipe(csv())
         .on('data', (row) => {
             people.push(row);
@@ -19,7 +20,7 @@ const initDb = function () {
         });
 }
 
-const searchCsv = function (name, caseSensitive) {
+const searchCsv = function(name, caseSensitive) {
     const searchTerm = caseSensitive ? name : name.toLowerCase();
 
     for (const person of people) {
