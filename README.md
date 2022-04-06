@@ -4,7 +4,9 @@
 Jeg har valgt å gjøre både oppgave a og b, og å utvide det til å sjekke alle personer i et selskap og å visualisere dette.
 
 ## Hvordan kjøre prosjektet
-Etter repositoriet er klonet, kjør følgende kommandoer:
+Prosjektet kan brukes på https://kyc-pep.azurewebsites.net/
+
+Eller: etter repositoriet er klonet, kjør følgende kommandoer:
 ```
 cd node-api
 npm install
